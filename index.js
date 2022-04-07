@@ -7,6 +7,6 @@ export const options = {
 };
 
 export default function () {
-  http.get('http://test.k6.io');
+  http.get('https://net6heroku.herokuapp.com/WeatherForecast');
   sleep(1);
 }
