@@ -1,18 +1,19 @@
-# Starter pipeline
-# Start with a minimal pipeline that you can customize to build and deploy your code.
-# Add steps that build, run tests, deploy, and more:
-# https://aka.ms/yaml
-
 trigger:
-- main
+  branches:
+    include:
+      - main
 
 pool:
-  vmImage: ubuntu-latest
+  vmImage: 'ubuntu-latest'
 
 steps:
-- task: k6-load-test@0
+- task: NodeTool@0
   inputs:
-    filename: 'index.js'
-    
+    versionSpec: '14.x'
+  displayName: 'Install Node.js'
 
+- script: npm install -g k6
+  displayName: 'Install k6'
 
+- script: k6 run index.js
+  displayName: 'Run k6 Tests'
